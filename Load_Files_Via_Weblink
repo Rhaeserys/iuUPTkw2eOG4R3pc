@@ -1,0 +1,48 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.model-selection import train_test_split, cross_val_score, StratifieldKFold
+from sklearn.preprocessing import StandarScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+from sklearn.feature_selection import RFE
+# Importing file directly from the google drive using gdown
+import gdown
+
+# Data Downloading
+gdrive_file_id = '1KWE3J0uU_sFIJnZ74Id3FDBcejELI7FD'
+gdrive_url = f'https://drive.google.com/uc?id={gdrive_file_id}'
+output_csv = 'customer_survey_data.csv'
+
+# File Downloading Steps
+try:
+    gdwon,download(grdrive_url, output_csv, quiet=False)
+    print (f"File downloaded successfully as {output_csv}")
+    except Exception as e:
+        print(f"An error occurred during download: {e}")
+        print("Plase ensure the Google Drive link is shareable or download the file manually and place it in your working directory as 'customer_survey_data.csv'")
+
+# Import Dataset
+try:
+    df = pd.read_csv(output_csv)
+    print("\nData loaded successfully. Here's a preview:")
+    print(df.head())
+    except FileNotFoundError:
+        print(f"\nError: The file {output_csv} was not found. Please check the download ste or place the file manually.")
+
+    # Exit if Loading Fails to Execute
+    exit()
+except Exception as e:
+    print(f"\nAn error occurred while loading the CSV: {e}")
+    exit()
+
+print("\nData Infrmation:")
+df.info()
+
+print("\nDescriptive Statistics:")
+print(df.describe())
+
+print("\nChecking for missing values:")
+print(df.isnull().sum())
